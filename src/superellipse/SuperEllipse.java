@@ -14,8 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import static java.lang.Math.pow;
 import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Hashtable;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -125,30 +124,31 @@ public class SuperEllipse extends JPanel implements ChangeListener {
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
-			JFrame f = new JFrame();
-			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			f.setTitle("Superellipse");
-			f.setResizable(false);
-			SuperEllipse panel = new SuperEllipse();
-			f.add(panel, BorderLayout.CENTER);
-
-			JSlider exponent = new JSlider(JSlider.HORIZONTAL, 1, 9, 5);
-			exponent.addChangeListener(panel);
-			exponent.setMajorTickSpacing(1);
-			exponent.setPaintLabels(true);
-			exponent.setBackground(Color.white);
-			exponent.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-			Map<Integer, JLabel> labelTable = new HashMap<>();
-			for (int i = 1; i < 10; i++)
-				labelTable.put(i, new JLabel(String.valueOf(i * 0.5)));
-			exponent.setLabelTable((Dictionary)labelTable);
-
-			f.add(exponent, BorderLayout.SOUTH);
-
-			f.pack();
-			f.setLocationRelativeTo(null);
-			f.setVisible(true);
-		});
+            JFrame f = new JFrame();
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setTitle("Superellipse");
+            f.setResizable(false);
+            SuperEllipse panel = new SuperEllipse();
+            f.add(panel, BorderLayout.CENTER);
+            
+            JSlider exponent = new JSlider(JSlider.HORIZONTAL, 1, 9, 5);
+            exponent.addChangeListener(panel);
+            exponent.setMajorTickSpacing(1);
+            exponent.setPaintLabels(true);
+            exponent.setBackground(Color.white);
+            exponent.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            
+            @SuppressWarnings("UseOfObsoleteCollectionType")
+            Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
+            for (int i = 1; i < 10; i++)
+                labelTable.put(i, new JLabel(String.valueOf(i * 0.5)));
+            exponent.setLabelTable((Dictionary)labelTable);
+            
+            f.add(exponent, BorderLayout.SOUTH);
+            
+            f.pack();
+            f.setLocationRelativeTo(null);
+            f.setVisible(true);
+        });
 	}
 }
